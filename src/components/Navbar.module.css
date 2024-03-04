@@ -1,0 +1,37 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: gray;
+    padding: 1em;
+    width: 100%;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    margin-top: 1px;
+}
+
+h2 {
+    font-size: 30px; /* Adicione a unidade (por exemplo, px) */
+    margin-left: 50px;
+    font-weight: bold; /* Melhora a semântica e a legibilidade */
+}
+
+.right a {
+    text-decoration: none;
+    color: white;
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+.right {
+    display: flex;
+    align-items: baseline; /* Ajusta conforme necessário para o design desejado */
+    margin-right: 30px;
+}
+
+.right span {
+    margin-right: 50px;
+}

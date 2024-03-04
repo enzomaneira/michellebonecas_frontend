@@ -1,0 +1,24 @@
+
+.content {
+  max-width: 1289px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.text-container {
+  flex: 1;
+}
+
+h1, p {
+  color: #FFF;
+  font-family: Inter;
+  font-size: 70px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p {
+  font-size: 14px;
+}
+
