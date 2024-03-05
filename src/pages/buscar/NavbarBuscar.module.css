@@ -1,0 +1,22 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    padding: 2%;
+    border-radius: 25px 25px 0 0; 
+    margin-top: -40%;
+    width: 100%;
+    margin-right: -15%;
+ }
+
+.navbar span {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbarDesafio a {
+    text-decoration: none;
+    color: white;
+    margin-right: 15px; /* Adicione margem entre os links */
+  }
