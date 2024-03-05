@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import styles from "./Form.module.css";
 import Input from "../../../components/Input";
 
-
-const AddProdutoForm = () => {
+const BuscarProdutoForm = ({ onSubmit }) => {
   const [produtoInfo, setProdutoInfo] = useState({
     nome: "",
-    preco: "",
-    foto: null,
+    precoMin: "",
+    precoMax: "",
   });
 
   const handleChange = (name, value) => {
@@ -17,22 +16,14 @@ const AddProdutoForm = () => {
     });
   };
 
-  const handleFileChange = (name, file) => {
-    setProdutoInfo({
-      ...produtoInfo,
-      [name]: file,
-    });
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Lógica para enviar os dados do produto
-    console.log("Dados do produto:", produtoInfo);
-    // Limpar os campos ou redirecionar, conforme necessário
+    // Lógica para buscar produtos com os dados fornecidos
+    onSubmit(produtoInfo);
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form onSubmit={handleSubmit} className={`${styles.form} ${styles.formContainer}`}>
       <div className={styles.column}>
         <div>
           <Input
@@ -46,26 +37,29 @@ const AddProdutoForm = () => {
         <div>
           <Input
             type="number"
-            text="Preço do Produto"
-            name="preco"
-            placeholder="Preço"
+            text="Preço Mínimo"
+            name="precoMin"
+            placeholder="Preço Mínimo"
             handleOnChange={handleChange}
           />
         </div>
         <div>
           <Input
-            type="file"
-            text="Upload da Foto"
-            name="foto"
-            handleOnChange={handleFileChange}
+            type="number"
+            text="Preço Máximo"
+            name="precoMax"
+            placeholder="Preço Máximo"
+            handleOnChange={handleChange}
           />
         </div>
       </div>
       <div className={styles.fullWidth}>
-      <button type="submit">Adicionar Pedido</button>
+        <button type="submit" className={styles.button}>
+          Buscar Produto
+        </button>
       </div>
     </form>
   );
 };
 
-export default AddProdutoForm;
+export default BuscarProdutoForm;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Form.module.css";
-import Input from "./Input";
+import Input from "../../../components/Input";
 
 const AddPedidoForm = () => {
   const [pedidoInfo, setPedidoInfo] = useState({

@@ -2,8 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import Buscar from './pages/buscar/Buscar.jsx'
-import Registrar from './pages/registrar/Registrar.jsx'
 import RegistrarVenda from './pages/registrar/registrarVenda/RegistrarVenda.jsx'
 import RegistrarProduto from './pages/registrar/registrarProduto/RegistrarProduto.jsx'
 import RegistrarCliente from './pages/registrar/registrarCliente/RegistrarCliente.jsx'
@@ -21,14 +19,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
-  {
-    path: "/buscar",
-    element: <Buscar />,
-  },
-  {
-    path: "/registrar",
-    element: <Registrar/>,
   },
   {
     path: "/registrarPedido",

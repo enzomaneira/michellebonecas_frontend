@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./Form.module.css";
 import Input from "../../../components/Input";
 
-const AddClienteForm = () => {
+const BuscarClienteForm = ({ onSubmit }) => {
   const [clienteInfo, setClienteInfo] = useState({
     nome: "",
     contato: "",
@@ -17,9 +17,8 @@ const AddClienteForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Lógica para enviar os dados do cliente
-    console.log("Dados do cliente:", clienteInfo);
-    // Limpar os campos ou redirecionar, conforme necessário
+    // Lógica para buscar cliente com os dados fornecidos
+    onSubmit(clienteInfo);
   };
 
   return (
@@ -45,10 +44,12 @@ const AddClienteForm = () => {
         </div>
       </div>
       <div className={styles.fullWidth}>
-      <button type="submit">Adicionar Pedido</button>
+        <button type="submit" className={styles.button}>
+          Buscar Cliente
+        </button>
       </div>
     </form>
   );
 };
 
-export default AddClienteForm;
+export default BuscarClienteForm;

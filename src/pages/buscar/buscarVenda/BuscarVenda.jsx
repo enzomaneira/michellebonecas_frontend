@@ -3,6 +3,7 @@ import Navbar from "../../../components/Navbar";
 import Container from "../../../components/Container";
 import styles from "./BuscarVenda.module.css"
 import NavbarBuscar from "../NavbarBuscar";
+import BuscarVendaForm from "../form/BuscarVendaForm"
 
 function BuscarVenda() {
   return (
@@ -10,6 +11,7 @@ function BuscarVenda() {
     <Navbar />
     <Container className={styles.container}>
       <NavbarBuscar className={styles.navbarDesafio} />
+      <BuscarVendaForm/>
     </Container>
   </div>
   );
