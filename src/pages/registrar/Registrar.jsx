@@ -9,8 +9,7 @@ function Registrar() {
     <div>
       <Navbar />
       <Container className={styles.container}>
-        <NavbarRegistrar/>
-        Oi teste container registrar
+        <NavbarRegistrar />
       </Container>
     </div>
   );

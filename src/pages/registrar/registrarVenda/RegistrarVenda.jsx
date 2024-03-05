@@ -3,6 +3,7 @@ import Navbar from "../../../components/Navbar";
 import Container from "../../../components/Container";
 import styles from "./RegistrarVenda.module.css"
 import NavbarRegistrar from "../NavbarRegistrar";
+import AddPedidoForm from "../form/AddPedidoForm";
 
 function RegistrarVenda() {
   return (
@@ -10,7 +11,7 @@ function RegistrarVenda() {
     <Navbar />
     <Container className={styles.container}>
       <NavbarRegistrar className={styles.navbarDesafio} />
-      RegistrarVenda
+      <AddPedidoForm/>
     </Container>
   </div>
   );

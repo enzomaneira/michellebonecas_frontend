@@ -10,7 +10,6 @@ function BuscarProduto() {
     <Navbar />
     <Container className={styles.container}>
       <NavbarBuscar className={styles.navbarDesafio} />
-      BuscarProduto
     </Container>
   </div>
   );

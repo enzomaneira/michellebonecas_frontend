@@ -10,7 +10,8 @@ function Buscar() {
       <Navbar />
       <Container className={styles.container}>
         <NavbarBuscar className={styles.navbarDesafio} />
-        Oi teste container buscar
+        <div className={styles.content}>
+        </div>
       </Container>
     </div>
   );
