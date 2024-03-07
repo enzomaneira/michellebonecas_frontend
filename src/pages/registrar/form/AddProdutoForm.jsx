@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import styles from "./Form.module.css";
 import Input from "../../../components/Input";
 
-
 const AddProdutoForm = () => {
   const [produtoInfo, setProdutoInfo] = useState({
-    nome: "",
-    preco: "",
-    foto: null,
+    name: "",
+    price: "",
+    imgUrl: null,
   });
 
   const handleChange = (name, value) => {
@@ -26,9 +25,30 @@ const AddProdutoForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Lógica para enviar os dados do produto
+
     console.log("Dados do produto:", produtoInfo);
-    // Limpar os campos ou redirecionar, conforme necessário
+    fetch("http://localhost:8080/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(produtoInfo),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Erro na requisição: ${response.status} - ${response.statusText}`
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Resposta do servidor:", data);
+        // Faça algo com a resposta JSON
+      })
+      .catch((error) => {
+        console.error("Erro ao processar resposta:", error);
+      });
   };
 
   return (
@@ -38,7 +58,7 @@ const AddProdutoForm = () => {
           <Input
             type="text"
             text="Nome do Produto"
-            name="nome"
+            name="name"
             placeholder="Nome"
             handleOnChange={handleChange}
           />
@@ -47,7 +67,7 @@ const AddProdutoForm = () => {
           <Input
             type="number"
             text="Preço do Produto"
-            name="preco"
+            name="price"
             placeholder="Preço"
             handleOnChange={handleChange}
           />
@@ -56,13 +76,13 @@ const AddProdutoForm = () => {
           <Input
             type="file"
             text="Upload da Foto"
-            name="foto"
+            name="imgUrl"
             handleOnChange={handleFileChange}
           />
         </div>
       </div>
       <div className={styles.fullWidth}>
-      <button type="submit">Adicionar Pedido</button>
+        <button type="submit">Adicionar Pedido</button>
       </div>
     </form>
   );

@@ -38,7 +38,7 @@ const Input = ({ type, text, name, placeholder, handleOnChange, value, options, 
           onChange={handleChange}
           value={value}
           min={type === "number" ? "0" : undefined}
-          max={type === "number" ? "10" : undefined}
+          max={type === "number" ? "100000s" : undefined}
           step={type === "number" ? "0.1" : undefined}
         />
       )}

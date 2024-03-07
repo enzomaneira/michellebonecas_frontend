@@ -46,11 +46,59 @@ const AddPedidoForm = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Lógica para enviar os dados do pedido
-    console.log("Dados do pedido:", pedidoInfo);
-    // Limpar os campos ou redirecionar, conforme necessário
+
+    // Desestruture os campos relevantes
+    const { nomeCliente, data, produtos } = pedidoInfo;
+
+    // Enviar campos separadamente
+    try {
+      // Enviar dados do cliente
+      const clienteResponse = await fetch("http://localhost:8080/clients", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: nomeCliente, contact: "" }), // Substitua "" pelo valor adequado para "contact"
+      });
+
+      if (!clienteResponse.ok) {
+        throw new Error(`Erro ao criar cliente: ${clienteResponse.status} - ${clienteResponse.statusText}`);
+      }
+
+      // Receber a resposta e extrair o ID do cliente, se necessário
+      const clienteData = await clienteResponse.json();
+      const clienteId = clienteData.id; // Substitua "id" pelo nome correto do campo
+
+      // Enviar dados do pedido
+      const pedidoResponse = await fetch("http://localhost:8080/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          date: data,
+          client: { id: clienteId }, // Substitua "id" pelo nome correto do campo
+          total: null, // Substitua null pelo valor adequado
+          items: produtos.map((produto) => ({
+            product: { id: null }, // Substitua "id" pelo nome correto do campo
+            qtd: produto.quantidade,
+            price: produto.preco,
+          })),
+        }),
+      });
+
+      if (!pedidoResponse.ok) {
+        throw new Error(`Erro ao criar pedido: ${pedidoResponse.status} - ${pedidoResponse.statusText}`);
+      }
+
+      // Faça algo com a resposta do servidor, se necessário
+      const pedidoData = await pedidoResponse.json();
+      console.log("Resposta do servidor:", pedidoData);
+    } catch (error) {
+      console.error("Erro ao processar resposta:", error);
+    }
   };
 
   return (
