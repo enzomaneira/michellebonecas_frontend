@@ -1,117 +1,191 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Form.module.css";
 import Input from "../../../components/Input";
 
 const AddPedidoForm = () => {
-  const [pedidoInfo, setPedidoInfo] = useState({
+  const [formData, setFormData] = useState({
     nomeCliente: "",
     data: "",
-    produtos: [
-      {
-        nomeProduto: "",
-        quantidade: "",
-        preco: "",
-      },
-    ],
+    produtos: [{ idProduto: "", quantidade: 0, preco: 0, name: "", imgUrl: "" }],
   });
 
-  const handleChange = (name, value, index) => {
-    if (index !== undefined) {
-      const updatedProdutos = [...pedidoInfo.produtos];
-      updatedProdutos[index][name] = value;
+  const [clientes, setClientes] = useState([]);
+  const [produtos, setProdutos] = useState([]);
 
-      setPedidoInfo({
-        ...pedidoInfo,
-        produtos: updatedProdutos,
-      });
-    } else {
-      setPedidoInfo({
-        ...pedidoInfo,
-        [name]: value,
-      });
+  useEffect(() => {
+    fetchClientes();
+    fetchProdutos();
+  }, []);
+
+  const fetchClientes = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/clients");
+      if (response.ok) {
+        const data = await response.json();
+        setClientes(data);
+      } else {
+        console.error("Erro ao buscar clientes:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar clientes:", error.message);
     }
   };
 
-  const handleAddProduto = () => {
-    setPedidoInfo({
-      ...pedidoInfo,
-      produtos: [
-        ...pedidoInfo.produtos,
-        {
-          nomeProduto: "",
-          quantidade: "",
-          preco: "",
+  const fetchProdutos = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/products");
+      if (response.ok) {
+        const data = await response.json();
+        setProdutos(data);
+      } else {
+        console.error("Erro ao buscar produtos:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar produtos:", error.message);
+    }
+  };
+
+  const createOrderItem = async (orderItemData) => {
+    try {
+      const response = await fetch("http://localhost:8080/orderItems", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      ],
-    });
+        body: JSON.stringify(orderItemData),
+      });
+
+      if (response.ok) {
+        const orderItem = await response.json();
+        console.log("OrderItem criado com sucesso:", orderItem);
+        return orderItem;
+      } else {
+        console.error("Erro ao criar OrderItem:", response.statusText);
+        return null;
+      }
+    } catch (error) {
+      console.error("Erro ao criar OrderItem:", error.message);
+      return null;
+    }
+  };
+
+  const handleChange = (name, value, index) => {
+    const newProdutos = [...formData.produtos];
+    if (name === "idProduto") {
+      newProdutos[index].idProduto = value;
+      const selectedProduct = produtos.find((produto) => produto.id === value);
+      if (selectedProduct) {
+        newProdutos[index].name = selectedProduct.name;
+        newProdutos[index].preco = selectedProduct.price;
+        newProdutos[index].imgUrl = selectedProduct.imgUrl;
+      }
+    } else {
+      newProdutos[index][name] = value;
+    }
+    setFormData({ ...formData, produtos: newProdutos });
+  };
+
+  const handleAddProduto = () => {
+    const newProdutos = [
+      ...formData.produtos,
+      { idProduto: "", quantidade: 0, preco: 0, name: "", imgUrl: "" },
+    ];
+    setFormData({ ...formData, produtos: newProdutos });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Desestruture os campos relevantes
-    const { nomeCliente, data, produtos } = pedidoInfo;
+    // Verificar se um cliente foi selecionado
+    if (!formData.nomeCliente) {
+      console.error("Selecione um cliente antes de enviar o pedido.");
+      return;
+    }
 
-    // Enviar campos separadamente
-    try {
-      // Enviar dados do cliente
-      const clienteResponse = await fetch("http://localhost:8080/clients", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: nomeCliente, contact: "" }), // Substitua "" pelo valor adequado para "contact"
-      });
+    // Buscar informações do cliente selecionado pelo nome
+    const selectedClient = clientes.find(
+      (cliente) => cliente.name === formData.nomeCliente
+    );
 
-      if (!clienteResponse.ok) {
-        throw new Error(`Erro ao criar cliente: ${clienteResponse.status} - ${clienteResponse.statusText}`);
-      }
-
-      // Receber a resposta e extrair o ID do cliente, se necessário
-      const clienteData = await clienteResponse.json();
-      const clienteId = clienteData.id; // Substitua "id" pelo nome correto do campo
-
-      // Enviar dados do pedido
-      const pedidoResponse = await fetch("http://localhost:8080/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          date: data,
-          client: { id: clienteId }, // Substitua "id" pelo nome correto do campo
-          total: null, // Substitua null pelo valor adequado
-          items: produtos.map((produto) => ({
-            product: { id: null }, // Substitua "id" pelo nome correto do campo
-            qtd: produto.quantidade,
+    // Criar OrderItems
+    const orderItems = await Promise.all(
+      formData.produtos.map(async (produto) => {
+        const orderItemData = {
+          product: {
+            id: produto.idProduto,
+            name: produto.name,
             price: produto.preco,
-          })),
-        }),
+            imgUrl: produto.imgUrl,
+          },
+          price: produto.preco,
+          qtd: produto.quantidade,
+        };
+        return createOrderItem(orderItemData);
+      })
+    );
+
+    if (!orderItems || orderItems.some((item) => item === null)) {
+      console.error("Erro ao criar OrderItems.");
+      return;
+    }
+
+    const requestBody = {
+      date: formData.data,
+      client: {
+        id: selectedClient.id,
+        name: selectedClient.name,
+        contact: selectedClient.contact,
+      },
+      items: orderItems,
+    };
+
+    console.log("JSON enviado para o backend:", JSON.stringify(requestBody));
+
+    try {
+      const response = await fetch("http://localhost:8080/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
       });
 
-      if (!pedidoResponse.ok) {
-        throw new Error(`Erro ao criar pedido: ${pedidoResponse.status} - ${pedidoResponse.statusText}`);
+      if (response.ok) {
+        console.log("Pedido adicionado com sucesso!");
+        // Limpar formulário ou exibir mensagem de sucesso
+      } else {
+        console.error("Erro ao adicionar pedido:", response.statusText);
+        // Exibir mensagem de erro ao usuário
       }
-
-      // Faça algo com a resposta do servidor, se necessário
-      const pedidoData = await pedidoResponse.json();
-      console.log("Resposta do servidor:", pedidoData);
     } catch (error) {
-      console.error("Erro ao processar resposta:", error);
+      console.error("Erro ao adicionar pedido:", error.message);
+      // Exibir mensagem de erro ao usuário
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`${styles.form} ${styles.formContainer}`}>
+    <form
+      onSubmit={handleSubmit}
+      className={`${styles.form} ${styles.formContainer}`}
+    >
       <div className={styles.column}>
         <div>
-          <Input
-            type="text"
-            text="Nome do Cliente"
+          <label htmlFor="clienteSelect">Selecione o Cliente:</label>
+          <select
+            id="clienteSelect"
             name="nomeCliente"
-            placeholder="Nome do Cliente"
-            handleOnChange={handleChange}
-          />
+            onChange={(e) =>
+              setFormData({ ...formData, nomeCliente: e.target.value })
+            }
+            value={formData.nomeCliente}
+          >
+            <option value="">Selecione...</option>
+            {clientes.map((cliente) => (
+              <option key={cliente.id} value={cliente.name}>
+                {cliente.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div>
           <Input
@@ -119,31 +193,42 @@ const AddPedidoForm = () => {
             text="Data"
             name="data"
             placeholder="Data"
-            handleOnChange={handleChange}
+            handleOnChange={(name, value) =>
+              setFormData({ ...formData, [name]: value })
+            }
           />
         </div>
       </div>
       <div className={styles.column}>
-        {pedidoInfo.produtos.map((produto, index) => (
+        {formData.produtos.map((produto, index) => (
           <div key={index}>
-            <Input
-              type="text"
-              text={`Nome do Produto ${index + 1}`}
-              name="nomeProduto"
-              placeholder="Nome do Produto"
-              handleOnChange={(name, value) => handleChange(name, value, index)}
-            />
+            <label htmlFor={`produtoSelect${index}`}>
+              Selecione o Produto {index + 1}:
+            </label>
+            <select
+              id={`produtoSelect${index}`}
+              name={`idProduto`}
+              onChange={(e) => handleChange("idProduto", e.target.value, index)}
+              value={produto.idProduto}
+            >
+              <option value="">Selecione...</option>
+              {produtos.map((produto) => (
+                <option key={produto.id} value={produto.id}>
+                  {produto.name}
+                </option>
+              ))}
+            </select>
             <Input
               type="number"
-              text={`Quantidade do Produto ${index + 1}`}
-              name="quantidade"
+              text={`Quantidade`}
+              name={`quantidade`}
               placeholder="Quantidade"
               handleOnChange={(name, value) => handleChange(name, value, index)}
             />
             <Input
               type="number"
-              text={`Preço do Produto ${index + 1}`}
-              name="preco"
+              text={`Preço`}
+              name={`preco`}
               placeholder="Preço"
               handleOnChange={(name, value) => handleChange(name, value, index)}
             />
@@ -152,9 +237,7 @@ const AddPedidoForm = () => {
         <button type="button" onClick={handleAddProduto}>
           Adicionar Produto
         </button>
-      </div>
-      <div className={styles.fullWidth}>
-        <button type="submit">Adicionar Pedido</button>
+        <button type="submit">Enviar Pedido</button>
       </div>
     </form>
   );
