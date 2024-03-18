@@ -5,35 +5,30 @@ import styles from "./BuscarProduto.module.css";
 import NavbarBuscar from "../NavbarBuscar";
 import BuscarProdutoForm from "../form/BuscarProdutoForm";
 import ResultadoBuscaProduto from "./resultadoProduto/ResultadoBuscaProduto";
+import { useNavigate } from "react-router-dom";
 
 function BuscarProduto() {
   const [resultadosBusca, setResultadosBusca] = useState([]);
-
+  const navigate = useNavigate(); // Utilize useNavigate para navegação programática
 
   const buildSearchUrl = (produtoInfo) => {
     const params = new URLSearchParams();
     if (produtoInfo.nome) params.append("name", produtoInfo.nome);
     if (produtoInfo.precoMin) params.append("minPrice", produtoInfo.precoMin);
     if (produtoInfo.precoMax) params.append("maxPrice", produtoInfo.precoMax);
-    const searchUrl = `http://localhost:8080/products/search?${params}`;
-    console.log("URL de busca:", searchUrl);
-    return searchUrl;
+    return params.toString(); // Retorna apenas os parâmetros da busca
   };
 
   const handleBuscaProduto = async (produtoInfo) => {
     try {
-      const searchUrl = buildSearchUrl(produtoInfo);
-      const response = await fetch(searchUrl);
-      if (response.ok) {
-        const data = await response.json();
-        setResultadosBusca(data);
-      } else {
-        console.error("Erro ao buscar produtos:", response.statusText);
-      }
+      const searchParams = buildSearchUrl(produtoInfo);
+      // Redirecionamento após a busca, enviando apenas os parâmetros da busca como query string
+      navigate(`/resultadoBuscaProduto/${searchParams}`);
     } catch (error) {
       console.error("Erro ao buscar produtos:", error.message);
     }
   };
+
 
   return (
     <div>
@@ -41,7 +36,6 @@ function BuscarProduto() {
       <Container className={styles.container}>
         <NavbarBuscar className={styles.navbarDesafio} />
         <BuscarProdutoForm onSubmit={handleBuscaProduto} />
-        <ResultadoBuscaProduto produtos={resultadosBusca} />
       </Container>
     </div>
   );

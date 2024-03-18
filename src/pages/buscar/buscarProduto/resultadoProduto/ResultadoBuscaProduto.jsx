@@ -4,23 +4,42 @@ import { useParams } from "react-router-dom";
 const ResultadoBuscaProduto = () => {
   const { query } = useParams();
   const [produtos, setProdutos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/products/search?name=${query}`);
+        const searchUrl = `http://localhost:8080/products/search?${query}`;
+        console.log("URL de busca:", searchUrl); // Console log para imprimir a URL
+        const response = await fetch(searchUrl);
         if (response.ok) {
           const data = await response.json();
           setProdutos(data);
+          setError(null); // Resetar o estado de erro se a busca for bem-sucedida
         } else {
-          console.error("Erro ao buscar produtos:", response.statusText);
+          setError("Erro ao buscar produtos:" + response.statusText);
         }
       } catch (error) {
-        console.error("Erro ao buscar produtos:", error.message);
+        setError("Erro ao buscar produtos:" + error.message);
+      } finally {
+        setLoading(false);
       }
     };
     fetchProdutos();
   }, [query]);
+
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
+  if (error) {
+    return <div>Erro: {error}</div>;
+  }
+
+  if (produtos.length === 0) {
+    return <div>Nenhum produto encontrado.</div>;
+  }
 
   return (
     <div>
