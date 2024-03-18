@@ -18,12 +18,11 @@ const BuscarProdutoForm = ({ onSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Lógica para buscar produtos com os dados fornecidos
     onSubmit(produtoInfo);
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`${styles.form} ${styles.formContainer}`}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.column}>
         <div>
           <Input

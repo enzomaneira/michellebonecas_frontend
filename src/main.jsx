@@ -8,6 +8,7 @@ import RegistrarCliente from './pages/registrar/registrarCliente/RegistrarClient
 import BuscarVenda from './pages/buscar/buscarVenda/BuscarVenda.jsx'
 import BuscarProduto from './pages/buscar/buscarProduto/BuscarProduto.jsx'
 import BuscarCliente from './pages/buscar/buscarCliente/BuscarCliente.jsx'
+import ResultadoBuscaProduto from './pages/buscar/buscarProduto/resultadoProduto/ResultadoBuscaProduto.jsx'
 
 import {
   createBrowserRouter,
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
   {
     path: "/buscarCliente",
     element: <BuscarCliente/>,
-  }
+  },
+  {
+      path: "/resultadoBuscaProduto/:query",
+      element: <ResultadoBuscaProduto/>,
+    },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

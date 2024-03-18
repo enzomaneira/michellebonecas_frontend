@@ -29,4 +29,6 @@
     margin: 0 auto;
   }
 
- 
+ .addProdutoButton {
+   margin-bottom: 10px; /* Ou o valor de margem que você preferir */
+ }

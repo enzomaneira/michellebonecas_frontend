@@ -234,10 +234,12 @@ const AddPedidoForm = () => {
             />
           </div>
         ))}
-        <button type="button" onClick={handleAddProduto}>
+        <button type="button" onClick={handleAddProduto} className={styles.addProdutoButton}>
           Adicionar Produto
         </button>
-        <button type="submit">Enviar Pedido</button>
+        <div className={styles.fullWidth}>
+          <button type="submit">Enviar Pedido</button>
+        </div>
       </div>
     </form>
   );
