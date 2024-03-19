@@ -1,10 +1,11 @@
+// BuscarVendaForm.jsx
 import React, { useState } from "react";
 import styles from "./Form.module.css";
 import Input from "../../../components/Input";
 
-const BuscarVendaForm = () => {
+const BuscarVendaForm = ({ onSubmit }) => {
   const [buscaVenda, setBuscaVenda] = useState({
-    produtos: [{ nomeProduto: "", quantidade: 1 }], // Inicialmente, um campo para um produto
+    nomeProduto: "",
     nomeCliente: "",
     valorMinimo: "",
     valorMaximo: "",
@@ -19,61 +20,22 @@ const BuscarVendaForm = () => {
     });
   };
 
-  const handleProdutoChange = (index, name, value) => {
-    const novosProdutos = [...buscaVenda.produtos];
-    novosProdutos[index] = {
-      ...novosProdutos[index],
-      [name]: value,
-    };
-
-    setBuscaVenda({
-      ...buscaVenda,
-      produtos: novosProdutos,
-    });
-  };
-
-  const handleAddProduto = () => {
-    setBuscaVenda({
-      ...buscaVenda,
-      produtos: [...buscaVenda.produtos, { nomeProduto: "", quantidade: 1 }],
-    });
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Lógica para buscar vendas com os dados informados
-    console.log("Dados da busca:", buscaVenda);
-    // Limpar os campos ou realizar a busca, conforme necessário
+    onSubmit(buscaVenda);
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`${styles.form} ${styles.formContainer}`}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.column}>
-        {buscaVenda.produtos.map((produto, index) => (
-          <div key={index}>
-            <Input
-              type="text"
-              text={`Nome do Produto ${index + 1}`}
-              name={`nomeProduto-${index}`}
-              placeholder="Nome do Produto"
-              handleOnChange={(value) => handleProdutoChange(index, "nomeProduto", value)}
-              value={produto.nomeProduto}
-            />
-            <Input
-              type="number"
-              text={`Quantidade do Produto ${index + 1}`}
-              name={`quantidade-${index}`}
-              placeholder="Quantidade"
-              handleOnChange={(value) => handleProdutoChange(index, "quantidade", value)}
-              value={produto.quantidade}
-            />
-          </div>
-        ))}
-        <button type="button" onClick={handleAddProduto} className={styles.buttonAddProduto}>
-          Adicionar Produto
-        </button>
-      </div>
-      <div className={styles.column}>
+        <Input
+          type="text"
+          text="Nome do Produto"
+          name="nomeProduto"
+          placeholder="Nome do Produto"
+          handleOnChange={handleChange}
+          value={buscaVenda.nomeProduto}
+        />
         <Input
           type="text"
           text="Nome do Cliente"
@@ -115,7 +77,7 @@ const BuscarVendaForm = () => {
           value={buscaVenda.dataMaxima}
         />
         <div className={styles.fullWidth}>
-          <button type="submit" className={styles.buttonSubmit}>
+          <button type="submit" className={styles.button}>
             Buscar Vendas
           </button>
         </div>
