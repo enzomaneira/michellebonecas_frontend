@@ -17,12 +17,11 @@ const BuscarClienteForm = ({ onSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Lógica para buscar cliente com os dados fornecidos
     onSubmit(clienteInfo);
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`${styles.form} ${styles.formContainer}`}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.column}>
         <div>
           <Input

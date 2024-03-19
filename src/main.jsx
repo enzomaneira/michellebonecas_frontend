@@ -9,6 +9,7 @@ import BuscarVenda from './pages/buscar/buscarVenda/BuscarVenda.jsx'
 import BuscarProduto from './pages/buscar/buscarProduto/BuscarProduto.jsx'
 import BuscarCliente from './pages/buscar/buscarCliente/BuscarCliente.jsx'
 import ResultadoBuscaProduto from './pages/buscar/buscarProduto/resultadoProduto/ResultadoBuscaProduto.jsx'
+import ResultadoBuscaCliente from './pages/buscar/buscarCliente/resultadoCliente/ResultadoBuscaCliente.jsx'
 
 import {
   createBrowserRouter,
@@ -48,7 +49,11 @@ const router = createBrowserRouter([
   {
       path: "/resultadoBuscaProduto/:query",
       element: <ResultadoBuscaProduto/>,
-    },
+  },
+ {
+      path: "/resultadoBuscaCliente/:query",
+      element: <ResultadoBuscaCliente/>,
+ },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

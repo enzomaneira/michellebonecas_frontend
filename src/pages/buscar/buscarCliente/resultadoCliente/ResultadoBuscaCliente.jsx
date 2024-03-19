@@ -2,33 +2,33 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Container from "../../../../components/Container";
 import Navbar from "../../../../components/Navbar";
-import styles from "./ResultadoBuscaProduto.module.css";
+import styles from "./ResultadoBuscaCliente.module.css";
 
-const ResultadoBuscaProduto = () => {
+const ResultadoBuscaCliente = () => {
   const { query } = useParams();
-  const [produtos, setProdutos] = useState([]);
+  const [clientes, setClientes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProdutos = async () => {
+    const fetchClientes = async () => {
       try {
-        const searchUrl = `http://localhost:8080/products/search?${query}`;
+        const searchUrl = `http://localhost:8080/clients/findByNameAndContact?${query}`;
         const response = await fetch(searchUrl);
         if (response.ok) {
           const data = await response.json();
-          setProdutos(data);
+          setClientes(data);
           setError(null);
         } else {
-          setError("Erro ao buscar produtos:" + response.statusText);
+          setError("Erro ao buscar clientes:" + response.statusText);
         }
       } catch (error) {
-        setError("Erro ao buscar produtos:" + error.message);
+        setError("Erro ao buscar clientes:" + error.message);
       } finally {
         setLoading(false);
       }
     };
-    fetchProdutos();
+    fetchClientes();
   }, [query]);
 
   if (loading) {
@@ -39,20 +39,19 @@ const ResultadoBuscaProduto = () => {
     return <div>Erro: {error}</div>;
   }
 
-  if (produtos.length === 0) {
-    return <div>Nenhum produto encontrado.</div>;
+  if (clientes.length === 0) {
+    return <div>Nenhum cliente encontrado.</div>;
   }
 
   return (
     <div>
       <Navbar />
       <Container>
-        <div className={styles.productContainer}> {}
-          {produtos.map((produto) => (
-            <div key={produto.id} className={styles.productItem}> {}
-              <h3>{produto.name}</h3>
-              <p>Preço: R$ {produto.price}</p>
-              <img src={produto.imgUrl} alt={produto.name} />
+        <div className={styles.clientContainer}>
+          {clientes.map((cliente) => (
+            <div key={cliente.id} className={styles.clientItem}>
+              <h3>{cliente.name}</h3>
+              <p>Contato: {cliente.contact}</p>
             </div>
           ))}
         </div>
@@ -61,4 +60,5 @@ const ResultadoBuscaProduto = () => {
   );
 };
 
-export default ResultadoBuscaProduto;
+export default ResultadoBuscaCliente;
+

@@ -1,0 +1,25 @@
+
+.productContainer {
+}
+
+.productItem {
+  width: calc(50% - 20px);
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  float: left;
+}
+
+.productItem h3 {
+  margin-bottom: 5px;
+}
+
+.productItem p {
+  margin-bottom: 10px;
+}
+
+.productItem img {
+  max-width: 100%;
+}
+
+
