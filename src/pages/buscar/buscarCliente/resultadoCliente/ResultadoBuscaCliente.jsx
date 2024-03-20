@@ -1,3 +1,4 @@
+// ResultadoBuscaCliente.jsx
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Container from "../../../../components/Container";
@@ -52,6 +53,8 @@ const ResultadoBuscaCliente = () => {
             <div key={cliente.id} className={styles.clientItem}>
               <h3>{cliente.name}</h3>
               <p>Contato: {cliente.contact}</p>
+              <p>Compras feitas: {cliente.count}</p>
+              <p>Valor Gastso: {cliente.countMoney}</p>
             </div>
           ))}
         </div>
@@ -61,4 +64,3 @@ const ResultadoBuscaCliente = () => {
 };
 
 export default ResultadoBuscaCliente;
-

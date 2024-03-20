@@ -9,20 +9,23 @@ import { useNavigate } from "react-router-dom";
 
 function BuscarProduto() {
   const [resultadosBusca, setResultadosBusca] = useState([]);
-  const navigate = useNavigate(); // Utilize useNavigate para navegação programática
+  const navigate = useNavigate();
 
   const buildSearchUrl = (produtoInfo) => {
     const params = new URLSearchParams();
     if (produtoInfo.nome) params.append("name", produtoInfo.nome);
     if (produtoInfo.precoMin) params.append("minPrice", produtoInfo.precoMin);
     if (produtoInfo.precoMax) params.append("maxPrice", produtoInfo.precoMax);
-    return params.toString(); // Retorna apenas os parâmetros da busca
+    if (produtoInfo.minCount) params.append("minCount", produtoInfo.minCount);
+    if (produtoInfo.maxCount) params.append("maxCount", produtoInfo.maxCount);
+    if (produtoInfo.minCountMoney) params.append("minCountMoney", produtoInfo.minCountMoney);
+    if (produtoInfo.maxCountMoney) params.append("maxCountMoney", produtoInfo.maxCountMoney);
+    return params.toString();
   };
 
   const handleBuscaProduto = async (produtoInfo) => {
     try {
       const searchParams = buildSearchUrl(produtoInfo);
-      // Redirecionamento após a busca, enviando apenas os parâmetros da busca como query string
       navigate(`/resultadoBuscaProduto/${searchParams}`);
     } catch (error) {
       console.error("Erro ao buscar produtos:", error.message);

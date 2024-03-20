@@ -1,3 +1,4 @@
+// BuscarClienteForm.jsx
 import React, { useState } from "react";
 import styles from "./Form.module.css";
 import Input from "../../../components/Input";
@@ -6,6 +7,10 @@ const BuscarClienteForm = ({ onSubmit }) => {
   const [clienteInfo, setClienteInfo] = useState({
     nome: "",
     contato: "",
+    minCompras: "",
+    maxCompras: "",
+    minValorCompras: "",
+    maxValorCompras: "",
   });
 
   const handleChange = (name, value) => {
@@ -30,6 +35,7 @@ const BuscarClienteForm = ({ onSubmit }) => {
             name="nome"
             placeholder="Nome"
             handleOnChange={handleChange}
+            value={clienteInfo.nome}
           />
         </div>
         <div>
@@ -39,6 +45,47 @@ const BuscarClienteForm = ({ onSubmit }) => {
             name="contato"
             placeholder="Contato"
             handleOnChange={handleChange}
+            value={clienteInfo.contato}
+          />
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Mínimo de Compras"
+            name="minCompras"
+            placeholder="Mínimo de Compras"
+            handleOnChange={handleChange}
+            value={clienteInfo.minCompras}
+          />
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Máximo de Compras"
+            name="maxCompras"
+            placeholder="Máximo de Compras"
+            handleOnChange={handleChange}
+            value={clienteInfo.maxCompras}
+          />
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Mínimo Valor de Compras"
+            name="minValorCompras"
+            placeholder="Mínimo Valor de Compras"
+            handleOnChange={handleChange}
+            value={clienteInfo.minValorCompras}
+          />
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Máximo Valor de Compras"
+            name="maxValorCompras"
+            placeholder="Máximo Valor de Compras"
+            handleOnChange={handleChange}
+            value={clienteInfo.maxValorCompras}
           />
         </div>
       </div>

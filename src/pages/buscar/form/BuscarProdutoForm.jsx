@@ -7,6 +7,10 @@ const BuscarProdutoForm = ({ onSubmit }) => {
     nome: "",
     precoMin: "",
     precoMax: "",
+    minCount: "",
+    maxCount: "",
+    minCountMoney: "",
+    maxCountMoney: "",
   });
 
   const handleChange = (name, value) => {
@@ -18,8 +22,16 @@ const BuscarProdutoForm = ({ onSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("Nome:", produtoInfo.nome);
+    console.log("Preço Mínimo:", produtoInfo.precoMin);
+    console.log("Preço Máximo:", produtoInfo.precoMax);
+    console.log("Count min: ", produtoInfo.minCount);
+    console.log("Count max: ", produtoInfo.maxCount);
+    console.log("Money min: ", produtoInfo.minCountMoney);
+    console.log("Money max: ", produtoInfo.maxCountMoney);
     onSubmit(produtoInfo);
   };
+
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
@@ -31,6 +43,7 @@ const BuscarProdutoForm = ({ onSubmit }) => {
             name="nome"
             placeholder="Nome"
             handleOnChange={handleChange}
+            value={produtoInfo.nome}
           />
         </div>
         <div>
@@ -40,6 +53,7 @@ const BuscarProdutoForm = ({ onSubmit }) => {
             name="precoMin"
             placeholder="Preço Mínimo"
             handleOnChange={handleChange}
+            value={produtoInfo.precoMin}
           />
         </div>
         <div>
@@ -49,6 +63,47 @@ const BuscarProdutoForm = ({ onSubmit }) => {
             name="precoMax"
             placeholder="Preço Máximo"
             handleOnChange={handleChange}
+            value={produtoInfo.precoMax}
+          />
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Quantidade Mínima"
+            name="minCount"
+            placeholder="Quantidade Mínima"
+            handleOnChange={handleChange}
+            value={produtoInfo.minCount}
+          />
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Quantidade Máxima"
+            name="maxCount"
+            placeholder="Quantidade Máxima"
+            handleOnChange={handleChange}
+            value={produtoInfo.maxCount}
+          />
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Valor Mínimo"
+            name="minCountMoney"
+            placeholder="Valor Mínimo"
+            handleOnChange={handleChange}
+            value={produtoInfo.minCountMoney}
+          />
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Valor Máximo"
+            name="maxCountMoney"
+            placeholder="Valor Máximo"
+            handleOnChange={handleChange}
+            value={produtoInfo.maxCountMoney}
           />
         </div>
       </div>

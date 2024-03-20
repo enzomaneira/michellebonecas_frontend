@@ -11,25 +11,27 @@ const ResultadoBuscaProduto = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProdutos = async () => {
-      try {
-        const searchUrl = `http://localhost:8080/products/search?${query}`;
-        const response = await fetch(searchUrl);
-        if (response.ok) {
-          const data = await response.json();
-          setProdutos(data);
-          setError(null);
-        } else {
-          setError("Erro ao buscar produtos:" + response.statusText);
+      const fetchProdutos = async () => {
+        try {
+          const searchUrl = `http://localhost:8080/products/search?${query}`;
+          console.log("URL de Busca:", searchUrl);
+          const response = await fetch(searchUrl);
+          if (response.ok) {
+            const data = await response.json();
+            setProdutos(data);
+            setError(null);
+          } else {
+            setError("Erro ao buscar produtos:" + response.statusText);
+          }
+        } catch (error) {
+          setError("Erro ao buscar produtos:" + error.message);
+        } finally {
+          setLoading(false);
         }
-      } catch (error) {
-        setError("Erro ao buscar produtos:" + error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProdutos();
-  }, [query]);
+      };
+      fetchProdutos();
+    }, [query]);
+
 
   if (loading) {
     return <div>Carregando...</div>;
@@ -47,11 +49,13 @@ const ResultadoBuscaProduto = () => {
     <div>
       <Navbar />
       <Container>
-        <div className={styles.productContainer}> {}
+        <div className={styles.productContainer}>
           {produtos.map((produto) => (
-            <div key={produto.id} className={styles.productItem}> {}
+            <div key={produto.id} className={styles.productItem}>
               <h3>{produto.name}</h3>
               <p>Preço: R$ {produto.price}</p>
+              <p>Unidades Vendidas: {produto.count}</p>
+              <p>Valor Arrecadado: R$ {produto.countMoney}</p>
               <img src={produto.imgUrl} alt={produto.name} />
             </div>
           ))}

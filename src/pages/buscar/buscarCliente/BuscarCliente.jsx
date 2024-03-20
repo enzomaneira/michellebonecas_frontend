@@ -15,6 +15,10 @@ function BuscarCliente() {
     const params = new URLSearchParams();
     if (clienteInfo.nome) params.append("name", clienteInfo.nome);
     if (clienteInfo.contato) params.append("contact", clienteInfo.contato);
+    if (clienteInfo.minCompras) params.append("minCompras", clienteInfo.minCompras);
+    if (clienteInfo.maxCompras) params.append("maxCompras", clienteInfo.maxCompras);
+    if (clienteInfo.minValorCompras) params.append("minValorCompras", clienteInfo.minValorCompras);
+    if (clienteInfo.maxValorCompras) params.append("maxValorCompras", clienteInfo.maxValorCompras);
     return params.toString();
   };
 

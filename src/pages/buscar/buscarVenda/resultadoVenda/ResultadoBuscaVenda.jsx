@@ -15,6 +15,7 @@ const ResultadoBuscaVenda = () => {
     const fetchVendas = async () => {
       try {
         const searchUrl = `http://localhost:8080/orders/fullSearch?${query}`;
+        console.log("URL de Busca:", searchUrl);
         const response = await fetch(searchUrl);
         if (response.ok) {
           const data = await response.json();
