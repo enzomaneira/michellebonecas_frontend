@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import styles from "./Form.module.css";
 import Input from "../../../components/Input";
+import SuccessMessage from "./SuccessMessage";
 
 const AddClienteForm = () => {
   const [clienteInfo, setClienteInfo] = useState({
     name: "",
     contact: "",
   });
+
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleChange = (name, value) => {
     setClienteInfo({
@@ -19,31 +22,34 @@ const AddClienteForm = () => {
     event.preventDefault();
     console.log("Dados do cliente:", clienteInfo);
     fetch("http://localhost:8080/clients", {
-    method: "POST",
-    headers: {
-    "Content-Type": "application/json",
-    },
-    body: JSON.stringify(clienteInfo),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(clienteInfo),
     })
-    .then((response) => {
-          if (!response.ok) {
-            throw new Error(
-              `Erro na requisição: ${response.status} - ${response.statusText}`
-            );
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Resposta do servidor:", data);
-        })
-        .catch((error) => {
-          console.error("Erro ao processar resposta:", error);
-        });
-
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Erro na requisição: ${response.status} - ${response.statusText}`
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Resposta do servidor:", data);
+        setShowSuccess(true);
+      })
+      .catch((error) => {
+        console.error("Erro ao processar resposta:", error);
+      });
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`${styles.form} ${styles.formContainer}`}>
+    <form
+      onSubmit={handleSubmit}
+      className={`${styles.form} ${styles.formContainer}`}
+    >
       <div className={styles.column}>
         <div>
           <Input
@@ -65,8 +71,9 @@ const AddClienteForm = () => {
         </div>
       </div>
       <div className={styles.fullWidth}>
-      <button type="submit">Adicionar Cliente</button>
+        <button type="submit">Adicionar Cliente</button>
       </div>
+     {showSuccess && <div className="message">Cliente registrado com sucesso!</div>}
     </form>
   );
 };

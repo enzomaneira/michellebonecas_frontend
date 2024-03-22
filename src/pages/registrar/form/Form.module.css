@@ -30,5 +30,13 @@
   }
 
  .addProdutoButton {
-   margin-bottom: 10px; /* Ou o valor de margem que você preferir */
+   margin-bottom: 10px;
  }
+
+.message {
+  color: green;
+  border: 1px solid green;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
