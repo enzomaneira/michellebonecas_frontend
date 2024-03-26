@@ -11,6 +11,12 @@ import BuscarCliente from './pages/buscar/buscarCliente/BuscarCliente.jsx'
 import ResultadoBuscaProduto from './pages/buscar/buscarProduto/resultadoProduto/ResultadoBuscaProduto.jsx'
 import ResultadoBuscaCliente from './pages/buscar/buscarCliente/resultadoCliente/ResultadoBuscaCliente.jsx'
 import ResultadoBuscaVenda from './pages/buscar/buscarVenda/resultadoVenda/ResultadoBuscaVenda.jsx'
+import Graficos from "./pages/graficos/Graficos.jsx"
+import GraficoPedidoCliente from "./pages/graficos/PedidoCliente/GraficoPedidoCliente.jsx"
+import PedidoData from "./pages/graficos/PedidoData/PedidoData.jsx"
+import PedidoProduto from "./pages/graficos/PedidoProduto/PedidoProduto.jsx"
+import ProdutosMaisVendidos from "./pages/graficos/ProdutosMaisVendidos/ProdutosMaisVendidos.jsx"
+import ProdutosPercentage from "./pages/graficos/ProdutosPorcentage/ProdutosPercentage.jsx"
 
 import {
   createBrowserRouter,
@@ -48,16 +54,40 @@ const router = createBrowserRouter([
     element: <BuscarCliente/>,
   },
   {
-      path: "/resultadoBuscaProduto/:query",
-      element: <ResultadoBuscaProduto/>,
+    path: "/resultadoBuscaProduto/:query",
+    element: <ResultadoBuscaProduto/>,
   },
  {
-      path: "/resultadoBuscaCliente/:query",
-      element: <ResultadoBuscaCliente/>,
+    path: "/resultadoBuscaCliente/:query",
+    element: <ResultadoBuscaCliente/>,
  },
  {
-       path: "/resultadoBuscaVenda/:query",
-       element: <ResultadoBuscaVenda/>,
+     path: "/resultadoBuscaVenda/:query",
+     element: <ResultadoBuscaVenda/>,
+  },
+  {
+   path: "/graficos",
+   element: <Graficos/>,
+  },
+  {
+     path: "/graficoPedidoCliente",
+     element: <GraficoPedidoCliente/>,
+  },
+  {
+     path: "/graficoPedidoData",
+    element: <PedidoData/>,
+  },
+  {
+      path: "/graficoPedidoProduto",
+       element: <PedidoProduto/>,
+  },
+ {
+     path: "/graficoMaisVendidos",
+     element: <ProdutosMaisVendidos/>,
+ },
+ {
+     path: "/graficoProdutosPercentage",
+     element: <ProdutosPercentage/>,
   }
 ])
 

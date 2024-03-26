@@ -8,7 +8,9 @@ function Navbar() {
     <nav className={styles.navbar}>
         <div className={styles.right}>
         <h2><Link to="/registrarCliente">Registrar</Link>
-        <Link to="/buscarCliente">Buscar</Link></h2>
+        <Link to="/buscarCliente">Buscar</Link>
+        <Link to="/graficos">Gráficos</Link>
+        </h2>
         </div>
         <div className={styles.right}>
         </div>

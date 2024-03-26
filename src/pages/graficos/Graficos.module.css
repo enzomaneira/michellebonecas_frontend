@@ -1,0 +1,30 @@
+.menuContainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.menuColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.menuLink {
+  text-decoration: none;
+}
+
+.menuItem {
+  border: 1px solid #ffffff;
+  padding: 10px;
+  margin-bottom: 30px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  color: #000000;
+  margin-left: 80px;
+   margin-right: 80px;
+}
+
+.menuItem:hover {
+  background-color: #eeeeee;
+}
