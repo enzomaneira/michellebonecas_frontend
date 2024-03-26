@@ -76,7 +76,6 @@ const ResultadoBuscaVenda = () => {
           </div>
           {vendas.map((venda) => (
             <div key={venda.id} className={styles.vendaItem}>
-              <h3>ID da Venda: {venda.id}</h3>
               <p>Cliente: {venda.client.name}</p>
               <p>Data da Venda: {venda.date}</p>
               <p>Total da Venda: R$ {venda.total}</p>
@@ -86,7 +85,7 @@ const ResultadoBuscaVenda = () => {
                   <li key={item.id}>
                     <p>Produto: {item.product.name}</p>
                     <p>Preço Unitário: R$ {item.price}</p>
-                    <p>Quantidade: {item.quantity}</p>
+                    <p>Quantidade: {item.qtd}</p>
                     <p>Subtotal: R$ {item.subTotal}</p>
                   </li>
                 ))}

@@ -1,76 +1,92 @@
 import React, { useState, useEffect } from 'react';
-import ApexChart from "react-apexcharts";
+import ApexChart from 'react-apexcharts';
 import axios from 'axios';
-import styles from './GraficoPedidoCliente.module.css';
-import Container from "../../../components/Container";
+import Container from '../../../components/Container';
+import Navbar from "../../../components/Navbar";
+import styles from "./GraficoPedidoCliente.module.css"
 
 function GraficoPedidoCliente() {
   const [clientData, setClientData] = useState([]);
+  const [dates, setDates] = useState([]);
+  const [totalSales, setTotalSales] = useState([]);
   const [selectedClient, setSelectedClient] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [clientsList, setClientsList] = useState([]);
-  const [showChart, setShowChart] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchClients();
+    fetchClientData();
   }, []);
 
-  const fetchClients = async () => {
+  const fetchClientData = async () => {
     try {
       const response = await axios.get('http://localhost:8080/clients');
-      setClientsList(response.data);
-    } catch (error) {
-      console.error('Error fetching clients:', error);
-    }
-  };
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8080/orders/fullSearch?client=${selectedClient}&minDate=${startDate}&maxDate=${endDate}`);
       setClientData(response.data);
-      setShowChart(true);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching client data:', error);
+      setError('Erro ao buscar dados do cliente.');
     }
   };
 
-  const handleGenerateChart = () => {
-    fetchData();
+  const handleClientChange = (event) => {
+    setSelectedClient(event.target.value);
+  };
+
+  useEffect(() => {
+    if (selectedClient) {
+      fetchSalesData();
+    }
+  }, [selectedClient]);
+
+  const fetchSalesData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/orders/fullSearch?client=${selectedClient}`);
+      processData(response.data);
+    } catch (error) {
+      console.error('Error fetching sales data:', error);
+      setError('Erro ao buscar dados de vendas.');
+    }
+  };
+
+  const processData = (salesData) => {
+    const dates = salesData.map(sale => new Date(sale.date));
+    const formattedDates = dates.map(date => `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);
+    const totalSales = salesData.map(sale => sale.total);
+
+    setDates(formattedDates);
+    setTotalSales(totalSales);
   };
 
   const options = {
-    xaxis: {
-      type: "datetime"
-    },
-    yaxis: {
-      tooltips: {
-        enabled: true
-      }
-    }
+    chart: { type: 'line', height: 400 },
+    xaxis: { categories: dates },
+    yaxis: { title: { text: 'Dinheiro Gasto' } },
+    tooltip: { x: { format: 'dd/MM/yyyy' } },
   };
 
-  const series = [{
-    name: 'Quantidade de Pedidos',
-    data: clientData.map(order => ({
-      x: new Date(order.date).getTime(),
-      y: order.quantity
-    }))
-  }];
+  const series = [{ name: 'R$', data: totalSales }];
 
   return (
-    <Container>
-      <select value={selectedClient} onChange={(e) => setSelectedClient(e.target.value)}>
-        <option value="">Selecione o cliente</option>
-        {clientsList.map(client => (
-          <option key={client.id} value={client.id}>{client.name}</option>
-        ))}
-      </select>
-      <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-      <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-      <button onClick={handleGenerateChart}>Gerar Gráfico</button>
-      {showChart && <ApexChart options={options} series={series} type="line" />}
-    </Container>
+    <div>
+      <Navbar />
+      <Container>
+        {error && <p>{error}</p>}
+        {clientData.length > 0 && (
+          <div>
+            <label htmlFor="clientSelect">Selecione o cliente:</label>
+            <select id="clientSelect" onChange={handleClientChange}>
+              <option value="">Selecione...</option>
+              {clientData.map(client => (
+                <option key={client.id} value={client.name}>{client.name}</option>
+              ))}
+            </select>
+          </div>
+        )}
+        {dates.length > 0 && totalSales.length > 0 && (
+          <div className={styles.chartContainer}>
+            <ApexChart options={options} series={series} type="line" />
+          </div>
+        )}
+      </Container>
+    </div>
   );
 }
 

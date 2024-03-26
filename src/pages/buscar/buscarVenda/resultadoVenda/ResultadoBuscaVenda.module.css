@@ -1,0 +1,46 @@
+/* ResultadoBuscaVenda.module.css */
+
+.vendaContainer {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.sortContainer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.sortContainer select {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.vendaItem {
+  width: calc(50% - 20px);
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.vendaItem p {
+  margin: 5px 0;
+}
+
+.vendaItem h4 {
+  margin-bottom: 10px;
+}
+
+.vendaItem ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.vendaItem ul li {
+  margin-bottom: 10px;
+}

@@ -18,11 +18,14 @@ function Graficos() {
             <Link to="/graficoPedidoData" className={styles.menuLink}>
               <div className={styles.menuItem}>Gráfico Pedido Data</div>
             </Link>
-            <Link to="/graficoPedidoProduto" className={styles.menuLink}>
-              <div className={styles.menuItem}>Gráfico Pedido Produto</div>
+            <Link to="/graficoMaioresCompradores" className={styles.menuLink}>
+              <div className={styles.menuItem}>Gráfico Maiores Compradores</div>
             </Link>
           </div>
           <div className={styles.menuColumn}>
+            <Link to="/graficoPedidoProduto" className={styles.menuLink}>
+              <div className={styles.menuItem}>Gráfico Pedido Produto</div>
+            </Link>
             <Link to="/graficoMaisVendidos" className={styles.menuLink}>
               <div className={styles.menuItem}>Gráfico Mais Vendidos</div>
             </Link>
