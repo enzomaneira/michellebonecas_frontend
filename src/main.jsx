@@ -18,6 +18,7 @@ import PedidoProduto from "./pages/graficos/PedidoProduto/PedidoProduto.jsx"
 import ProdutosMaisVendidos from "./pages/graficos/ProdutosMaisVendidos/ProdutosMaisVendidos.jsx"
 import ProdutosPercentage from "./pages/graficos/ProdutosPorcentage/ProdutosPercentage.jsx"
 import MaioresCompradores from "./pages/graficos/MaioresCompradores/MaioresCompradores.jsx"
+import Status from "./pages/status/Status.jsx"
 
 import {
   createBrowserRouter,
@@ -93,7 +94,11 @@ const router = createBrowserRouter([
   {
        path: "/graficoMaioresCompradores",
        element: <MaioresCompradores/>,
-    }
+  },
+  {
+      path: "/status",
+      element: <Status/>,
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

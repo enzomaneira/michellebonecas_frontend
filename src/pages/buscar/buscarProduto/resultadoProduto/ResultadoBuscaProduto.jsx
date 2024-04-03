@@ -78,7 +78,7 @@ const ResultadoBuscaProduto = () => {
           </div>
           {produtos.map((produto) => (
             <div key={produto.id} className={styles.productItem}>
-              <h3>{produto.name}</h3>
+              <h3>{produto.name} - Número: {produto.number}</h3>
               <p>Preço: R$ {produto.price}</p>
               <p>Unidades Vendidas: {produto.count}</p>
               <p>Valor Arrecadado: R$ {produto.countMoney}</p>

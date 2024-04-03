@@ -7,6 +7,7 @@ const AddProdutoForm = () => {
     name: "",
     price: "",
     imgUrl: null,
+    number: 0, // Inicialize "number" com um valor padrão
   });
 
   const handleChange = (name, value) => {
@@ -80,9 +81,18 @@ const AddProdutoForm = () => {
             handleOnChange={handleFileChange}
           />
         </div>
+        <div>
+          <Input
+            type="number"
+            text="Número do Produto"
+            name="number"
+            placeholder="Número"
+            handleOnChange={handleChange}
+          />
+        </div>
       </div>
       <div className={styles.fullWidth}>
-        <button type="submit">Adicionar Pedido</button>
+        <button type="submit">Adicionar Produto</button>
       </div>
     </form>
   );

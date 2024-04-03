@@ -7,6 +7,7 @@ const AddClienteForm = () => {
   const [clienteInfo, setClienteInfo] = useState({
     name: "",
     contact: "",
+    number: 0, // Initialize "number" with a default value
   });
 
   const [showSuccess, setShowSuccess] = useState(false);
@@ -69,11 +70,22 @@ const AddClienteForm = () => {
             handleOnChange={handleChange}
           />
         </div>
+        <div>
+          <Input
+            type="number"
+            text="Número do Cliente"
+            name="number"
+            placeholder="Número"
+            handleOnChange={handleChange}
+          />
+        </div>
       </div>
       <div className={styles.fullWidth}>
         <button type="submit">Adicionar Cliente</button>
       </div>
-     {showSuccess && <div className="message">Cliente registrado com sucesso!</div>}
+      {showSuccess && (
+        <div className="message">Cliente registrado com sucesso!</div>
+      )}
     </form>
   );
 };

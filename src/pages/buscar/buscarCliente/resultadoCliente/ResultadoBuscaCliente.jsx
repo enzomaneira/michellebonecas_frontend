@@ -77,7 +77,7 @@ const ResultadoBuscaCliente = () => {
           </div>
           {clientes.map((cliente) => (
             <div key={cliente.id} className={styles.clientItem}>
-              <h3>{cliente.name}</h3>
+              <h3>{cliente.name} - Número: {cliente.number}</h3>
               <p>Contato: {cliente.contact}</p>
               <p>Compras feitas: {cliente.count}</p>
               <p>Valor Gastso: {cliente.countMoney}</p>

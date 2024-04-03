@@ -7,6 +7,8 @@ const AddPedidoForm = () => {
     nomeCliente: "",
     data: "",
     produtos: [{ idProduto: "", quantidade: 0, preco: 0, name: "", imgUrl: "" }],
+    number: "", // Adicionando o campo number
+    orderStatus: 1, // Definindo o orderStatus como 1 (ESPERA)
   });
 
   const [clientes, setClientes] = useState([]);
@@ -137,6 +139,8 @@ const AddPedidoForm = () => {
         contact: selectedClient.contact,
       },
       items: orderItems,
+      number: formData.number, // Adicionando o campo number ao requestBody
+      orderStatus: formData.orderStatus, // Adicionando o OrderStatus ao requestBody
     };
 
     console.log("JSON enviado para o backend:", JSON.stringify(requestBody));
@@ -197,6 +201,34 @@ const AddPedidoForm = () => {
               setFormData({ ...formData, [name]: value })
             }
           />
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Número do Pedido"
+            name="number"
+            placeholder="Número do Pedido"
+            handleOnChange={(name, value) =>
+              setFormData({ ...formData, [name]: value })
+            }
+          />
+        </div>
+        <div>
+          <label htmlFor="statusOrderSelect">Selecione o Status:</label>
+          <select
+            id="statusOrderSelect"
+            name="orderStatus"
+            onChange={(e) =>
+              setFormData({ ...formData, orderStatus: parseInt(e.target.value) })
+            }
+            value={formData.orderStatus}
+          >
+            <option value="1">ESPERA</option>
+            <option value="2">EM_CONFECCAO</option>
+            <option value="3">PRONTO</option>
+            <option value="4">ENTREGUE</option>
+            <option value="5">PAGO</option>
+          </select>
         </div>
       </div>
       <div className={styles.column}>

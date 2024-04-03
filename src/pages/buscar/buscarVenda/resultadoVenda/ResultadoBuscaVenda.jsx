@@ -60,42 +60,48 @@ const ResultadoBuscaVenda = () => {
   }
 
   return (
-    <div>
-      <Navbar />
-      <Container>
-        <div className={styles.vendaContainer}>
-          <div className={styles.sortContainer}>
-            <select value={sortBy} onChange={handleSortByChange}>
-              <option value="date">Data</option>
-              <option value="total">Total</option>
-            </select>
-            <select value={sortDirection} onChange={handleSortDirectionChange}>
-              <option value="asc">ASC</option>
-              <option value="desc">DESC</option>
-            </select>
-          </div>
-          {vendas.map((venda) => (
-            <div key={venda.id} className={styles.vendaItem}>
-              <p>Cliente: {venda.client.name}</p>
-              <p>Data da Venda: {venda.date}</p>
-              <p>Total da Venda: R$ {venda.total}</p>
-              <h4>Itens da Venda:</h4>
-              <ul>
-                {venda.items.map((item) => (
-                  <li key={item.id}>
-                    <p>Produto: {item.product.name}</p>
-                    <p>Preço Unitário: R$ {item.price}</p>
-                    <p>Quantidade: {item.qtd}</p>
-                    <p>Subtotal: R$ {item.subTotal}</p>
-                  </li>
-                ))}
-              </ul>
+      <div>
+        <Navbar />
+        <Container>
+          <div className={styles.vendaContainer}>
+            <div className={styles.sortContainer}>
+              <select value={sortBy} onChange={handleSortByChange}>
+                <option value="date">Data</option>
+                <option value="total">Total</option>
+              </select>
+              <select value={sortDirection} onChange={handleSortDirectionChange}>
+                <option value="asc">ASC</option>
+                <option value="desc">DESC</option>
+              </select>
             </div>
-          ))}
-        </div>
-      </Container>
-    </div>
-  );
+            {vendas.map((venda) => (
+              <div key={venda.id} className={styles.vendaItem}>
+                <p>Número: {venda.number}</p>
+                <p>Cliente: {venda.client.name}</p>
+                <p>Data da Venda: {venda.date}</p>
+                <p>Total da Venda: R$ {venda.total}</p>
+                <p>Data Inicial: {venda.dateInit}</p>
+                <p>Data Final: {venda.dateEnd}</p>
+                <p>Data de Entrega: {venda.dateDeliver}</p>
+                <p>Data de Pagamento: {venda.datePayment}</p>
+                <h4>Itens da Venda:</h4>
+                <ul>
+                  {venda.items.map((item) => (
+                    <li key={item.id}>
+                      <p>Produto: {item.product.name}</p>
+                      <p>Preço Unitário: R$ {item.price}</p>
+                      <p>Quantidade: {item.qtd}</p>
+                      <p>Subtotal: R$ {item.subTotal}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </div>
+    );
+
 };
 
 export default ResultadoBuscaVenda;

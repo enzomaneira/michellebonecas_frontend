@@ -10,6 +10,7 @@ function Navbar() {
         <h2><Link to="/registrarCliente">Registrar</Link>
         <Link to="/buscarCliente">Buscar</Link>
         <Link to="/graficos">Gráficos</Link>
+        <Link to="/status">Status</Link>
         </h2>
         </div>
         <div className={styles.right}>
