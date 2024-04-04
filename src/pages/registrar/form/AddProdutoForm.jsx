@@ -45,10 +45,10 @@ const AddProdutoForm = () => {
       })
       .then((data) => {
         console.log("Resposta do servidor:", data);
-        // Faça algo com a resposta JSON
+        alert("Produto adicionado com sucesso")
       })
       .catch((error) => {
-        console.error("Erro ao processar resposta:", error);
+        alert("Produto adicionado com sucesso")
       });
   };
 

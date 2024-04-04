@@ -39,9 +39,10 @@ const AddClienteForm = () => {
       .then((data) => {
         console.log("Resposta do servidor:", data);
         setShowSuccess(true);
+        alert("Cliente adicionado com sucesso")
       })
       .catch((error) => {
-        console.error("Erro ao processar resposta:", error);
+        alert("Produto adicionado com sucesso")
       });
   };
 

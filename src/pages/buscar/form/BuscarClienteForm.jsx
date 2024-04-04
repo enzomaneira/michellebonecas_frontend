@@ -7,10 +7,10 @@ const BuscarClienteForm = ({ onSubmit }) => {
   const [clienteInfo, setClienteInfo] = useState({
     nome: "",
     contato: "",
-    minCompras: "",
-    maxCompras: "",
-    minValorCompras: "",
-    maxValorCompras: "",
+    minCount: "",
+    maxCount: "",
+    minCountMoney: "",
+    maxCountMoney: "",
   });
 
   const handleChange = (name, value) => {
@@ -52,40 +52,40 @@ const BuscarClienteForm = ({ onSubmit }) => {
           <Input
             type="number"
             text="Mínimo de Compras"
-            name="minCompras"
+            name="minCount"
             placeholder="Mínimo de Compras"
             handleOnChange={handleChange}
-            value={clienteInfo.minCompras}
+            value={clienteInfo.minCount}
           />
         </div>
         <div>
           <Input
             type="number"
             text="Máximo de Compras"
-            name="maxCompras"
+            name="maxCount"
             placeholder="Máximo de Compras"
             handleOnChange={handleChange}
-            value={clienteInfo.maxCompras}
+            value={clienteInfo.maxCount}
           />
         </div>
         <div>
           <Input
             type="number"
             text="Mínimo Valor de Compras"
-            name="minValorCompras"
+            name="minCountMoney"
             placeholder="Mínimo Valor de Compras"
             handleOnChange={handleChange}
-            value={clienteInfo.minValorCompras}
+            value={clienteInfo.minCountMoney}
           />
         </div>
         <div>
           <Input
             type="number"
             text="Máximo Valor de Compras"
-            name="maxValorCompras"
+            name="maxCountMoney"
             placeholder="Máximo Valor de Compras"
             handleOnChange={handleChange}
-            value={clienteInfo.maxValorCompras}
+            value={clienteInfo.maxCountMoney}
           />
         </div>
       </div>

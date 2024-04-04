@@ -1,3 +1,4 @@
+// BuscarCliente.jsx
 import React, { useState } from "react";
 import Navbar from "../../../components/Navbar";
 import Container from "../../../components/Container";
@@ -15,10 +16,10 @@ function BuscarCliente() {
     const params = new URLSearchParams();
     if (clienteInfo.nome) params.append("name", clienteInfo.nome);
     if (clienteInfo.contato) params.append("contact", clienteInfo.contato);
-    if (clienteInfo.minCompras) params.append("minCompras", clienteInfo.minCompras);
-    if (clienteInfo.maxCompras) params.append("maxCompras", clienteInfo.maxCompras);
-    if (clienteInfo.minValorCompras) params.append("minValorCompras", clienteInfo.minValorCompras);
-    if (clienteInfo.maxValorCompras) params.append("maxValorCompras", clienteInfo.maxValorCompras);
+    if (clienteInfo.minCount) params.append("minCount", clienteInfo.minCount);
+    if (clienteInfo.maxCount) params.append("maxCount", clienteInfo.maxCount);
+    if (clienteInfo.minCountMoney) params.append("minCountMoney", clienteInfo.minCountMoney);
+    if (clienteInfo.maxCountMoney) params.append("maxCountMoney", clienteInfo.maxCountMoney);
     return params.toString();
   };
 

@@ -97,19 +97,13 @@ const AddPedidoForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Verificar se um cliente foi selecionado
     if (!formData.nomeCliente) {
       console.error("Selecione um cliente antes de enviar o pedido.");
       return;
     }
-
-    // Buscar informações do cliente selecionado pelo nome
     const selectedClient = clientes.find(
       (cliente) => cliente.name === formData.nomeCliente
     );
-
-    // Criar OrderItems
     const orderItems = await Promise.all(
       formData.produtos.map(async (produto) => {
         const orderItemData = {
@@ -125,12 +119,10 @@ const AddPedidoForm = () => {
         return createOrderItem(orderItemData);
       })
     );
-
     if (!orderItems || orderItems.some((item) => item === null)) {
       console.error("Erro ao criar OrderItems.");
       return;
     }
-
     const requestBody = {
       date: formData.data,
       client: {
@@ -139,8 +131,8 @@ const AddPedidoForm = () => {
         contact: selectedClient.contact,
       },
       items: orderItems,
-      number: formData.number, // Adicionando o campo number ao requestBody
-      orderStatus: formData.orderStatus, // Adicionando o OrderStatus ao requestBody
+      number: formData.number,
+      orderStatus: formData.orderStatus,
     };
 
     console.log("JSON enviado para o backend:", JSON.stringify(requestBody));
@@ -156,14 +148,12 @@ const AddPedidoForm = () => {
 
       if (response.ok) {
         console.log("Pedido adicionado com sucesso!");
-        // Limpar formulário ou exibir mensagem de sucesso
+        alert("Pedido adicionado com sucesso")
       } else {
         console.error("Erro ao adicionar pedido:", response.statusText);
-        // Exibir mensagem de erro ao usuário
       }
     } catch (error) {
       console.error("Erro ao adicionar pedido:", error.message);
-      // Exibir mensagem de erro ao usuário
     }
   };
 
