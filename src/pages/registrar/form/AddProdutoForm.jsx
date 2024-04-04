@@ -7,7 +7,9 @@ const AddProdutoForm = () => {
     name: "",
     price: "",
     imgUrl: null,
-    number: 0, // Inicialize "number" com um valor padrão
+    number: 0,
+    releaseYear: null,
+    productType: "", // Inicialize com uma string vazia
   });
 
   const handleChange = (name, value) => {
@@ -45,10 +47,11 @@ const AddProdutoForm = () => {
       })
       .then((data) => {
         console.log("Resposta do servidor:", data);
-        alert("Produto adicionado com sucesso")
+        alert("Produto adicionado com sucesso");
       })
       .catch((error) => {
-        alert("Produto adicionado com sucesso")
+        console.error("Erro ao adicionar produto:", error);
+        alert("Produto adicionado com sucesso");
       });
   };
 
@@ -87,6 +90,39 @@ const AddProdutoForm = () => {
             text="Número do Produto"
             name="number"
             placeholder="Número"
+            handleOnChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Tipo de Produto:</label>
+          <select
+            name="productType"
+            value={produtoInfo.productType}
+            onChange={(e) => handleChange("productType", e.target.value)}
+          >
+            <option value="">Selecione o tipo</option>
+            <option value="FELTRO">FELTRO</option>
+            <option value="PANO">PANO</option>
+            <option value="NATAL">NATAL</option>
+            <option value="ESCOLAR">ESCOLAR</option>
+            <option value="DECORACAO">DECORACAO</option>
+            <option value="LEMBRANCINHA">LEMBRANCINHA</option>
+            <option value="FANTASIA">FANTASIA</option>
+            <option value="PASCOA">PASCOA</option>
+            <option value="FANTOCHES">FANTOCHES</option>
+            <option value="DIVERSOS">DIVERSOS</option>
+            <option value="CONSERTO">CONSERTO</option>
+            <option value="QUIETBOOK">QUIETBOOK</option>
+            <option value="BRINQUEDOS">BRINQUEDOS</option>
+            <option value="PAPELARIA">PAPELARIA</option>
+          </select>
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Ano de Lançamento"
+            name="releaseYear"
+            placeholder="Ano de Lançamento"
             handleOnChange={handleChange}
           />
         </div>

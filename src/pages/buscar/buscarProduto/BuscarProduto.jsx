@@ -20,6 +20,8 @@ function BuscarProduto() {
     if (produtoInfo.maxCount) params.append("maxCount", produtoInfo.maxCount);
     if (produtoInfo.minCountMoney) params.append("minCountMoney", produtoInfo.minCountMoney);
     if (produtoInfo.maxCountMoney) params.append("maxCountMoney", produtoInfo.maxCountMoney);
+    if (produtoInfo.releaseYear) params.append("releaseYear", produtoInfo.releaseYear);
+    if (produtoInfo.productType) params.append("productType", produtoInfo.productType);
     return params.toString();
   };
 

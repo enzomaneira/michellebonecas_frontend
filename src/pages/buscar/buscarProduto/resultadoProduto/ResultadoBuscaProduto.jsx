@@ -82,6 +82,8 @@ const ResultadoBuscaProduto = () => {
               <p>Preço: R$ {produto.price}</p>
               <p>Unidades Vendidas: {produto.count}</p>
               <p>Valor Arrecadado: R$ {produto.countMoney}</p>
+              <p>Tipo de Produto: {produto.productType}</p>
+              <p>Ano de Lançamento: {produto.releaseYear}</p>
               <img src={produto.imgUrl} alt={produto.name} />
             </div>
           ))}

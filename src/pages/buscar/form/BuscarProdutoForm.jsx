@@ -11,6 +11,9 @@ const BuscarProdutoForm = ({ onSubmit }) => {
     maxCount: "",
     minCountMoney: "",
     maxCountMoney: "",
+    minReleaseYear: "",
+    maxReleaseYear: "",
+    productType: "",
   });
 
   const handleChange = (name, value) => {
@@ -29,9 +32,11 @@ const BuscarProdutoForm = ({ onSubmit }) => {
     console.log("Count max: ", produtoInfo.maxCount);
     console.log("Money min: ", produtoInfo.minCountMoney);
     console.log("Money max: ", produtoInfo.maxCountMoney);
+    console.log("Ano de Lançamento Mínimo:", produtoInfo.minReleaseYear);
+    console.log("Ano de Lançamento Máximo:", produtoInfo.maxReleaseYear);
+    console.log("Tipo de Produto:", produtoInfo.productType);
     onSubmit(produtoInfo);
   };
-
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
@@ -105,6 +110,51 @@ const BuscarProdutoForm = ({ onSubmit }) => {
             handleOnChange={handleChange}
             value={produtoInfo.maxCountMoney}
           />
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Ano de Lançamento Mínimo"
+            name="minReleaseYear"
+            placeholder="Ano de Lançamento Mínimo"
+            handleOnChange={handleChange}
+            value={produtoInfo.minReleaseYear}
+          />
+        </div>
+        <div>
+          <Input
+            type="number"
+            text="Ano de Lançamento Máximo"
+            name="maxReleaseYear"
+            placeholder="Ano de Lançamento Máximo"
+            handleOnChange={handleChange}
+            value={produtoInfo.maxReleaseYear}
+          />
+        </div>
+        <div>
+          <label htmlFor="productType">Tipo de Produto:</label>
+          <select
+            id="productType"
+            name="productType"
+            onChange={(e) => handleChange("productType", e.target.value)}
+            value={produtoInfo.productType}
+          >
+            <option value="">Selecione o Tipo</option>
+            <option value="FELTRO">FELTRO</option>
+            <option value="PANO">PANO</option>
+            <option value="NATAL">NATAL</option>
+            <option value="ESCOLAR">ESCOLAR</option>
+            <option value="DECORACAO">DECORAÇÃO</option>
+            <option value="LEMBRANCINHA">LEMBRANCINHA</option>
+            <option value="FANTASIA">FANTASIA</option>
+            <option value="PASCOA">PÁSCOA</option>
+            <option value="FANTOCHES">FANTOCHES</option>
+            <option value="DIVERSOS">DIVERSOS</option>
+            <option value="CONSERTO">CONSERTO</option>
+            <option value="QUIETBOOK">QUIET BOOK</option>
+            <option value="BRINQUEDOS">BRINQUEDOS</option>
+            <option value="PAPELARIA">PAPELARIA</option>
+          </select>
         </div>
       </div>
       <div className={styles.fullWidth}>
