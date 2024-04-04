@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import styles from "./Form.module.css";
 import Input from "../../../components/Input";
-import SuccessMessage from "./SuccessMessage";
 
 const AddClienteForm = () => {
   const [clienteInfo, setClienteInfo] = useState({
     name: "",
     contact: "",
-    number: 0, // Initialize "number" with a default value
+    number: 0,
   });
 
   const [showSuccess, setShowSuccess] = useState(false);
@@ -49,8 +48,7 @@ const AddClienteForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className={`${styles.form} ${styles.formContainer}`}
-    >
+      className={`${styles.form} ${styles.formContainer}`} >
       <div className={styles.column}>
         <div>
           <Input
