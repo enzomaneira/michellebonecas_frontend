@@ -44,7 +44,7 @@ const BuscarClienteForm = ({ onSubmit }) => {
             type="text"
             text="Da onde conheceu o cliente"
             name="where"
-            placeholder="Where"
+            placeholder="Onde"
             handleOnChange={handleChange}
             value={clienteInfo.where}
             />

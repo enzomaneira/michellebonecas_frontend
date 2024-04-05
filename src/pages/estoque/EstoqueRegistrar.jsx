@@ -38,12 +38,14 @@ function EstoqueRegistrar() {
       <Container className={styles.container}>
         <NavbarEstoque className={styles.navbarDesafio} />
         <div className={styles.form}>
+          <label htmlFor="numeroProduto">Número do Produto:</label>
           <input
             type="number"
             placeholder="Número do Produto"
             value={numeroProduto}
             onChange={(e) => setNumeroProduto(e.target.value)}
           />
+          <label htmlFor="quantidadeEstoque">Quantidade a Adicionar:</label>
           <input
             type="number"
             placeholder="Quantidade a Adicionar"
@@ -52,6 +54,7 @@ function EstoqueRegistrar() {
           />
           <button onClick={handleUpdateEstoque}>Atualizar Estoque</button>
         </div>
+
       </Container>
     </div>
   );

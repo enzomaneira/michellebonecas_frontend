@@ -75,9 +75,9 @@ function Status() {
     <div>
       <Navbar />
       <Container className={styles.container}>
-        <h1>Status do Pedido</h1>
+        <label htmlFor="statusAtualizado" className={styles.label}>Status do Pedido</label>
         {error && <div className={styles.error}>{error}</div>}
-        <div>
+        <div className={styles.selectContainer}>
           <select onChange={handlePedidoChange}>
             <option value="">Selecione um pedido</option>
             {pedidos.map((pedido) => (
@@ -86,14 +86,18 @@ function Status() {
               </option>
             ))}
           </select>
-          {pedidoSelecionado && (
-            <div>
-              <div>Pedido Selecionado: #{pedidoSelecionado.number}</div>
+        </div>
+        {pedidoSelecionado && (
+          <div>
+            <div>Pedido Selecionado: #{pedidoSelecionado.number}</div>
+            <div className={styles.inputGroup}>
               <input
                 type="date"
                 value={dataSelecionada}
                 onChange={(e) => setDataSelecionada(e.target.value)}
               />
+            </div>
+            <div className={styles.selectGroup}>
               <select
                 value={statusAtualizado}
                 onChange={(e) => setStatusAtualizado(e.target.value)}
@@ -105,10 +109,13 @@ function Status() {
                 <option value="4">ENTREGUE</option>
                 <option value="5">PAGO</option>
               </select>
+            </div>
+
+            <div className={styles.buttonContainer}>
               <button onClick={handleStatusChange}>Confirmar Mudança de Status</button>
             </div>
-          )}
-        </div>
+          </div>
+        )}
         {loading && <div>Carregando...</div>}
       </Container>
     </div>

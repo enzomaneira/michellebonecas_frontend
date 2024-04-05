@@ -36,16 +36,18 @@ function EstoqueMenu() {
       <Navbar />
       <Container className={styles.container}>
         <NavbarEstoque className={styles.navbarDesafio} />
-        <div>
+        <div className={`${styles.selectContainer} ${styles.formGroup}`}>
           <label htmlFor="numeroProduto">Número do Produto:</label>
           <input
             type="text"
             id="numeroProduto"
+            placeHolder="Número do Produto"
             value={numeroProduto}
             onChange={(e) => setNumeroProduto(e.target.value)}
           />
-          <button onClick={buscarProduto}>Buscar</button>
+          <button className={styles.buttonGroup} onClick={buscarProduto}>Buscar</button>
         </div>
+
         {nomeProduto && (
           <div>
             <p>Nome do Produto: {nomeProduto}</p>

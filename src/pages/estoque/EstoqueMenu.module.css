@@ -1,16 +1,19 @@
-.navbarDesafio {
-    display: flex;
+/* EstoqueMenu.module.css */
 
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px; /* Adiciona mais espaçamento em relação ao topo do container */
+}
 
-  .navbarDesafio span {
-    color: white;
-    font-weight: bold;
-    font-size: 1.5rem;
-  }
+.formGroup {
+  margin-top: 50px;
+  padding: 10px;
+}
 
-  .container {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 80px;
-  }
+.buttonGroup {
+  margin-top: 20px; /* Adiciona espaçamento acima do botão */
+  margin-bottom: 20px; /* Adiciona espaçamento abaixo do botão */
+}

@@ -66,7 +66,7 @@ const AddClienteForm = () => {
            type="text"
            text="Da onde conheceu o cliente"
            name="where"
-           placeholder="Where"
+           placeholder="Onde"
            handleOnChange={handleChange}
            />
         </div>
