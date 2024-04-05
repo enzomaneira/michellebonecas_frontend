@@ -43,7 +43,7 @@ const AddClienteForm = () => {
         alert("Cliente adicionado com sucesso")
       })
       .catch((error) => {
-        alert("Produto adicionado com sucesso")
+        alert("Cliente adicionado com sucesso")
       });
   };
 

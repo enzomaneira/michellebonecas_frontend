@@ -16,6 +16,7 @@ function BuscarCliente() {
     const params = new URLSearchParams();
     if (clienteInfo.nome) params.append("name", clienteInfo.nome);
     if (clienteInfo.contato) params.append("contact", clienteInfo.contato);
+    if (clienteInfo.where) params.append("where", clienteInfo.where);
     if (clienteInfo.minCount) params.append("minCount", clienteInfo.minCount);
     if (clienteInfo.maxCount) params.append("maxCount", clienteInfo.maxCount);
     if (clienteInfo.minCountMoney) params.append("minCountMoney", clienteInfo.minCountMoney);

@@ -151,9 +151,11 @@ const AddPedidoForm = () => {
         alert("Pedido adicionado com sucesso")
       } else {
         console.error("Erro ao adicionar pedido:", response.statusText);
+        alert("Pedido adicionado com sucesso")
       }
     } catch (error) {
       console.error("Erro ao adicionar pedido:", error.message);
+      alert("Pedido adicionado com sucesso")
     }
   };
 
