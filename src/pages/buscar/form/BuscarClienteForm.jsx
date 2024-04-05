@@ -6,6 +6,7 @@ import Input from "../../../components/Input";
 const BuscarClienteForm = ({ onSubmit }) => {
   const [clienteInfo, setClienteInfo] = useState({
     nome: "",
+    where: "",
     contato: "",
     minCount: "",
     maxCount: "",
@@ -37,6 +38,16 @@ const BuscarClienteForm = ({ onSubmit }) => {
             handleOnChange={handleChange}
             value={clienteInfo.nome}
           />
+        </div>
+        <div>
+          <Input
+            type="text"
+            text="Da onde conheceu o cliente"
+            name="where"
+            placeholder="Where"
+            handleOnChange={handleChange}
+            value={clienteInfo.where}
+            />
         </div>
         <div>
           <Input

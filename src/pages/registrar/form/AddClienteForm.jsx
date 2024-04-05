@@ -5,6 +5,7 @@ import Input from "../../../components/Input";
 const AddClienteForm = () => {
   const [clienteInfo, setClienteInfo] = useState({
     name: "",
+    where: "",
     contact: "",
     number: 0,
   });
@@ -59,6 +60,15 @@ const AddClienteForm = () => {
             placeholder="Nome"
             handleOnChange={handleChange}
           />
+        </div>
+        <div>
+         <Input
+           type="text"
+           text="Da onde conheceu o cliente"
+           name="where"
+           placeholder="Where"
+           handleOnChange={handleChange}
+           />
         </div>
         <div>
           <Input
