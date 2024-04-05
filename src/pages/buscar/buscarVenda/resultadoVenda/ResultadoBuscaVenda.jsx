@@ -76,27 +76,38 @@ const ResultadoBuscaVenda = () => {
             </div>
             {vendas.map((venda) => (
               <div key={venda.id} className={styles.vendaItem}>
-                <p>Número: {venda.number}</p>
-                <p>Cliente: {venda.client.name}</p>
-                <p>Data da Venda: {venda.date}</p>
-                <p>Total da Venda: R$ {venda.total}</p>
-                <p>Data Inicial: {venda.dateInit}</p>
-                <p>Data Final: {venda.dateEnd}</p>
-                <p>Data de Entrega: {venda.dateDeliver}</p>
-                <p>Data de Pagamento: {venda.datePayment}</p>
+                <div className={styles.vendaItemRow}>
+                  <p>Número: {venda.number}</p>
+                  <p>Cliente: {venda.client.name}</p>
+                </div>
+                <div className={styles.vendaItemRow}>
+                  <p>Data da Venda: {venda.date}</p>
+                  <p>Total da Venda: R$ {venda.total}</p>
+                </div>
+                <div className={styles.vendaItemRow}>
+                  <p>Data Inicial: {venda.dateInit}</p>
+                  <p>Data Final: {venda.dateEnd}</p>
+                </div>
+                <div className={styles.vendaItemRow}>
+                  <p>Data de Entrega: {venda.dateDeliver}</p>
+                  <p>Data de Pagamento: {venda.datePayment}</p>
+                </div>
                 <h4>Itens da Venda:</h4>
                 <ul>
                   {venda.items.map((item) => (
                     <li key={item.id}>
-                      <p>Produto: {item.product.name}</p>
-                      <p>Preço Unitário: R$ {item.price}</p>
-                      <p>Quantidade: {item.qtd}</p>
-                      <p>Subtotal: R$ {item.subTotal}</p>
+                      <div className={styles.itemInfo}>
+                        <p>Produto: {item.product.name}</p>
+                        <p>Preço Unitário: R$ {item.price}</p>
+                        <p>Quantidade: {item.qtd}</p>
+                      </div>
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
+
+
           </div>
         </Container>
       </div>

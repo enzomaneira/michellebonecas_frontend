@@ -75,9 +75,10 @@ const ResultadoBuscaProduto = () => {
               <option value="asc">ASC</option>
               <option value="desc">DESC</option>
             </select>
+            <button onClick={handleSort}>Ordenar</button>
           </div>
           {produtos.map((produto) => (
-            <div key={produto.id} className={styles.productItem}>
+            <div key={produto.id} className={`${styles.searchResultsContainer}`}>
               <h3>{produto.name} - Número: {produto.number}</h3>
               <p>Preço: R$ {produto.price}</p>
               <p>Unidades Vendidas: {produto.count}</p>
