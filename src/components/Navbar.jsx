@@ -12,6 +12,7 @@ function Navbar() {
         <Link to="/graficos">Gráficos</Link>
         <Link to="/status">Status</Link>
         <Link to="/estoqueMenu">Estoque</Link>
+        <Link to="/editarCliente">Editar</Link>
         </h2>
         </div>
         <div className={styles.right}>

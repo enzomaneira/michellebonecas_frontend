@@ -21,6 +21,8 @@ import MaioresCompradores from "./pages/graficos/MaioresCompradores/MaioresCompr
 import Status from "./pages/status/Status.jsx"
 import EstoqueMenu from "./pages/estoque/EstoqueMenu.jsx"
 import EstoqueRegistrar from "./pages/estoque/EstoqueRegistrar.jsx"
+import EditarCliente from "./pages/edit/editarCliente/EditarCliente.jsx"
+import EditarProduto from "./pages/edit/editarProduto/EditarProduto.jsx"
 
 import {
   createBrowserRouter,
@@ -108,7 +110,15 @@ const router = createBrowserRouter([
   {
        path: "/estoqueRegistrar",
        element: <EstoqueRegistrar/>
-    }
+  },
+  {
+      path: "/editarCliente",
+      element: <EditarCliente/>
+  },
+  {
+      path: "/editarProduto",
+      element: <EditarProduto/>
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
