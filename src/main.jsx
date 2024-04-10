@@ -23,6 +23,8 @@ import EstoqueMenu from "./pages/estoque/EstoqueMenu.jsx"
 import EstoqueRegistrar from "./pages/estoque/EstoqueRegistrar.jsx"
 import EditarCliente from "./pages/edit/editarCliente/EditarCliente.jsx"
 import EditarProduto from "./pages/edit/editarProduto/EditarProduto.jsx"
+import EditarVenda from "./pages/edit/editarVenda/EditarVenda.jsx"
+
 
 import {
   createBrowserRouter,
@@ -118,7 +120,12 @@ const router = createBrowserRouter([
   {
       path: "/editarProduto",
       element: <EditarProduto/>
+  },
+  {
+      path: "/editarVenda",
+      element: <EditarVenda/>
   }
+
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

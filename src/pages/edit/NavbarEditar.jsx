@@ -8,6 +8,7 @@ function NavbarEditar() {
       <span>
         <Link to="/editarCliente">Cliente</Link>
         <Link to="/editarProduto">Produto</Link>
+        <Link to="/editarVenda">Pedido</Link>
       </span>
     </nav>
   );
