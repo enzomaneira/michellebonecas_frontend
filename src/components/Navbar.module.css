@@ -1,37 +1,46 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: pink;
-    padding: 1em;
-    width: 100%;
-    text-color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    margin-top: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: pink;
+  padding: 1em;
+  width: 100%;
+  text-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  margin-top: 1px;
 }
 
 h2 {
-    font-size: 30px; /* Adicione a unidade (por exemplo, px) */
-    margin-left: 50px;
-    font-weight: bold; /* Melhora a semântica e a legibilidade */
+  font-size: 30px;
+  margin-left: 10px;
+  font-weight: bold;
 }
 
 .right a {
-    text-decoration: none;
-    color: white;
-    margin-left: 20px;
-    font-size: 30px;
+  text-decoration: none;
+  color: white;
+  margin-left: 10px;
+  font-size: 30px;
 }
 
 .right {
-    display: flex;
-    align-items: baseline; /* Ajusta conforme necessário para o design desejado */
-    margin-right: 30px;
+  display: flex;
+  align-items: baseline;
+  margin-right: auto;
 }
 
 .right span {
-    margin-right: 50px;
+  margin-right: 50px;
+}
+
+.logoContainer {
+  width: 60px;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
 }
